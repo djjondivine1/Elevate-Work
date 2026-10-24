@@ -1,4 +1,4 @@
-TWO KINDS OF STATIC. ONE JOB EACH.. White & Pink Noise, explained.
+TWO KINDS OF STATIC. ONE JOB EACH. White & Pink Noise, explained.
 
 White noise has equal energy at every frequency, so it sounds bright and hissy. Pink noise has equal energy per octave, so it sounds fuller and more natural.
 

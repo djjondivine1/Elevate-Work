@@ -788,7 +788,7 @@ const HANDLE = "@elevatedjacademy";
 const HASHTAGS = "#elevatedjacademy #djtips #learntodj #djeducation #djlife #djcommunity #mixing";
 
 function caption(l) {
-  const first = l.hook.lines.join(" ");
+  const first = l.hook.lines.join(" ").replace(/\.+$/, "");
   if (l.roundup) {
     return [
       `${first}. Save this one.`,
