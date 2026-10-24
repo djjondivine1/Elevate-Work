@@ -4,6 +4,17 @@ const { draw } = require("./waves");
 const { cheat, HANDLE } = require("../content/lessons");
 
 const A = "../../assets"; // HTML files live in build/tmp/
+const MAN = require("../assets/jon/manifest.json");
+const K = { smirk: 1.12, point: 1.25 }; // optical size tweaks per expression
+
+// Jon sticker placed on a side with the frame-cut edge pushed off canvas. head = target head width in px.
+function jon(mood, side, head, o = {}) {
+  const m = MAN[mood] || MAN.smile;
+  const w = Math.round((head / m.headfrac) * (K[mood] || 1));
+  const flip = m.cut === "none" ? side === "left" : (m.cut === "left" && side === "right") || (m.cut === "right" && side === "left");
+  const off = o.off == null ? -28 : o.off;
+  return `<img class="jon" src="${A}/jon/${m.file}" style="width:${w}px;${side}:${off}px;bottom:-10px;${flip ? "transform:scaleX(-1);" : ""}">`;
+}
 
 const FONT_CSS = `
 @font-face{font-family:"Downey";src:url("${A}/fonts/Downey-Black.ttf");font-weight:900}
@@ -109,7 +120,7 @@ const L = (n) => `${A}/logos/web/${n}.png`;
 
 function foot(i, o = {}) {
   if (o.dotsLeft) return `<div class="foot" style="justify-content:flex-start">${dots(i)}</div>`;
-  const left = o.noMark ? `<span></span>` : `<img class="mk" src="${L("mark-gold")}">`;
+  const left = o.noMark ? `<span style="width:150px"></span>` : `<img class="mk" src="${L("mark-gold")}">`;
   const right = o.swipe ? `<span class="swipe">SWIPE &raquo;</span>` : `<span style="width:150px"></span>`;
   return `<div class="foot">${left}${dots(i)}${right}</div>`;
 }
@@ -127,19 +138,18 @@ function slideHook(l, fmt) {
   const wt = l.wave === "grid" ? "complex" : l.wave;
   const waveH = story ? 360 : 300;
   const wave = draw(wt, { w: 1080, h: waveH, mini: true });
-  const jonW = story ? 640 : 560;
   const col = `<div class="col" style="align-items:center">
     ${headline(l.hook.lines, { center: true, poster: true, accentFrom: l.hook.accentFrom, max: story ? 150 : 140, min: 70 })}
   </div>`;
   const waveTop = story ? 880 : 640;
   return shell(fmt, `${pill()}${col}
     <div style="position:absolute;left:0;top:${waveTop}px;width:1080px;z-index:2;opacity:.95">${wave}</div>
-    <img class="jon" src="${A}/jon/jon-serious-sticker.png" style="width:${jonW}px;right:-24px;bottom:-10px">
-    <div style="position:absolute;left:60px;bottom:${story ? 330 : 150}px;width:470px;z-index:5">
+    ${jon(l.mood.hook, "right", story ? 275 : 240)}
+    <div style="position:absolute;left:60px;bottom:${story ? 330 : 120}px;width:470px;z-index:5;display:flex;flex-direction:column;align-items:flex-start">
       <div class="rule" style="margin:0 0 18px"></div>
       <div style="font:700 33px/1.3 Montserrat;color:var(--ivory)">${esc(l.hook.sub).replace(", explained", ",<br>explained")}</div>
+      <div class="tag" style="margin:22px 0 0"><span>SWIPE &raquo;</span></div>
     </div>
-    <div class="tag" style="position:absolute;right:60px;bottom:${story ? 330 : 156}px;z-index:7;margin:0"><span>SWIPE &raquo;</span></div>
     ${foot(0)}`);
 }
 
@@ -155,14 +165,13 @@ function slidePain(l, fmt) {
       <div class="body">${esc(l.pain.body)}</div>
     </div>${foot(1)}`);
   }
-  const jonW = story ? 760 : 500;
   return shell(fmt, `${pill()}<div class="col">
       <div class="tag"><span>THE PROBLEM</span></div>
       ${hl}
       <div class="rule"></div>
       <div class="body" style="width:${story ? 520 : 540}px;margin-left:auto;margin-top:${story ? 20 : 0}px;${story ? "font-size:45px;" : ""}">${esc(l.pain.body)}</div>
     </div>
-    <img class="jon" src="${A}/jon/jon-serious-sticker.png" style="width:${jonW}px;left:-34px;bottom:-10px;transform:scaleX(-1)">
+    ${jon(l.mood.pain, "left", story ? 300 : 215)}
     ${foot(1, { noMark: true })}`);
 }
 
@@ -196,27 +205,25 @@ function slideFix(l, fmt) {
   const story = fmt === "story";
   const hl = headline(l.fix.head, { max: story ? 112 : 104, min: 60 });
   const steps = l.fix.steps.map((s, i) => `<div class="step"><div class="dot">${i + 1}</div><div class="st">${esc(s)}</div></div>`).join("");
-  const jonW = story ? 560 : 440;
   return shell(fmt, `${pill()}<div class="col">
     <div class="tag"><span>THE FIX</span></div>
     ${hl}
     <div class="call" style="margin:${story ? 34 : 24}px 0 ${story ? 36 : 26}px"><b>DO THIS:</b><p>${esc(l.fix.callout)}</p></div>
-    <div class="steps" style="width:${story ? 620 : 610}px">${steps}</div>
+    <div class="steps" style="width:${story ? 600 : 570}px">${steps}</div>
   </div>
-  <img class="jon" src="${A}/jon/jon-smile-sticker.png" style="width:${jonW}px;right:-30px;bottom:-10px">
+  ${jon(l.mood.fix, "right", story ? 245 : 190)}
   ${foot(3)}`);
 }
 
 function slideCta(l, fmt) {
   const story = fmt === "story";
   const lines = l.roundup ? ["WANT EVERY", "LESSON IN", "THE SERIES?"] : ["WANT MORE", "LESSONS LIKE", "THIS?"];
-  const jonW = story ? 610 : 600;
   return shell(fmt, `${pill()}<div class="col" style="align-items:center;text-align:center">
     ${headline(lines, { center: true, accentFrom: 2, max: story ? 128 : 120, min: 70 })}
     <div style="font:600 36px/1.35 Montserrat;margin-top:${story ? 34 : 24}px;max-width:820px">Join Elevate DJ Academy.<br><span style="color:var(--gold2)">It's free.</span></div>
     <div style="margin-top:${story ? 36 : 26}px"><span class="btn">LINK IN BIO</span></div>
   </div>
-  <img class="jon" src="${A}/jon/jon-smile-sticker.png" style="width:${jonW}px;right:-30px;bottom:-10px">
+  ${jon(l.mood.cta, "right", story ? 270 : 255)}
   <div style="position:absolute;left:60px;bottom:${story ? 330 : 150}px;z-index:6;width:430px">
     <img src="${L("secondary-ivory")}" style="width:${story ? 380 : 400}px;display:block">
     <div style="font:700 28px/1 Montserrat;margin-top:20px;letter-spacing:.4px">${HANDLE}</div>

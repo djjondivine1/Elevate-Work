@@ -62,8 +62,21 @@ Needs Node with `playwright` (Chromium). Output goes to `output/`. Layout warnin
 - `build/render.js`: renderer.
 - `assets/fonts`, `assets/logos` (+ `web/` trimmed versions): from the Elevate Logo Kit (Drive).
 - `assets/jon`: Jon's headshots plus the white-outline sticker cutouts.
+- `assets/jon/emotions`: Jon's expressions (skeptical, sad, smirk, pointing, shocked) as plain cutouts and sticker versions.
+  `assets/jon/manifest.json` lists every sticker (which frame edge is cut, head size) so the templates place each one correctly.
 - `assets/art`: Jon's character scenes, cropped from his published carousels.
 - `tools/`: contact-sheet helpers and the Drive decode helper.
+
+### Jon's expressions
+
+Each lesson picks an expression per slide in `content/lessons.js` (`mood: { hook, pain, fix, cta }`).
+Available: `serious`, `smile`, `skeptical`, `sad`, `smirk`, `point`, `shocked`. The concerned faces sit on the
+problem slide, pointing sits on "do this tonight", and smiling sits on the CTA.
+
+The full `Jon Divine Emotions` folder (13+ transparent PNGs on Jon's Mac) isn't reachable from the cloud session, so
+these were cut from the six published thumbnails (`tools/make_emotions.py`). To use the originals, copy them into
+`assets/jon/emotions/` and add them to `assets/jon/manifest.json` (file, `cut` edge, `headfrac`), then set the new
+name as a lesson's `mood`.
 
 ### Adding more of Jon's art
 

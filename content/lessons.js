@@ -4,10 +4,11 @@
 //
 // layout: "sticker" = Jon cutout on the pain slide, "art" = framed character art on the pain slide.
 // art: file in assets/art/ (Jon's published character art).
+// mood: which Jon expression sticker (assets/jon/manifest.json) is used on the hook, pain (sticker layout), fix and CTA slides.
 
 const lessons = [
   {
-    n: 1, slug: "sine-wave", name: "Sine Wave", wave: "sine", layout: "sticker",
+    n: 1, mood: { hook: "serious", pain: "skeptical", fix: "smile", cta: "smirk" }, slug: "sine-wave", name: "Sine Wave", wave: "sine", layout: "sticker",
     hook: { lines: ["THE PUREST", "SOUND", "THERE IS"], accentFrom: 1, sub: "Sine wave, explained in 5 swipes" },
     pain: {
       head: ["YOU'VE HEARD IT.", "YOU CAN'T SEE IT."],
@@ -47,7 +48,7 @@ const lessons = [
     },
   },
   {
-    n: 2, slug: "square-wave", name: "Square Wave", wave: "square", layout: "art", art: "color-overwhelmed",
+    n: 2, mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "square-wave", name: "Square Wave", wave: "square", layout: "art", art: "color-overwhelmed",
     hook: { lines: ["WHY IT", "SOUNDS", "SO BUZZY"], accentFrom: 2, sub: "Square wave, explained in 5 swipes" },
     pain: {
       head: ["THE EDGE THAT", "CUTS THROUGH"],
@@ -87,7 +88,7 @@ const lessons = [
     },
   },
   {
-    n: 3, slug: "triangle-wave", name: "Triangle Wave", wave: "triangle", layout: "sticker",
+    n: 3, mood: { hook: "smirk", pain: "sad", fix: "smile", cta: "smirk" }, slug: "triangle-wave", name: "Triangle Wave", wave: "triangle", layout: "sticker",
     hook: { lines: ["SOFTER", "THAN A", "SQUARE WAVE"], accentFrom: 2, sub: "Triangle wave, explained in 5 swipes" },
     pain: {
       head: ["STRAIGHT LINES.", "SOFT SOUND."],
@@ -127,7 +128,7 @@ const lessons = [
     },
   },
   {
-    n: 4, slug: "sawtooth-wave", name: "Sawtooth Wave", wave: "saw", layout: "art", art: "bw-load-in",
+    n: 4, mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "sawtooth-wave", name: "Sawtooth Wave", wave: "saw", layout: "art", art: "bw-load-in",
     hook: { lines: ["THE WAVE", "BEHIND BIG", "EDM SOUNDS"], accentFrom: 2, sub: "Sawtooth wave, explained in 5 swipes" },
     pain: {
       head: ["BRIGHT. THICK.", "EVERYWHERE."],
@@ -167,7 +168,7 @@ const lessons = [
     },
   },
   {
-    n: 5, slug: "pulse-wave", name: "Pulse Wave", wave: "pulse", layout: "sticker",
+    n: 5, mood: { hook: "skeptical", pain: "sad", fix: "smirk", cta: "smile" }, slug: "pulse-wave", name: "Pulse Wave", wave: "pulse", layout: "sticker",
     hook: { lines: ["ONE KNOB.", "A WHOLE NEW", "SOUND"], accentFrom: 1, sub: "Pulse wave, explained in 5 swipes" },
     pain: {
       head: ["SQUARE'S MORE", "FLEXIBLE COUSIN"],
@@ -207,7 +208,7 @@ const lessons = [
     },
   },
   {
-    n: 6, slug: "white-and-pink-noise", name: "White & Pink Noise", wave: "noise", layout: "art", art: "bw-stressed-callout",
+    n: 6, mood: { hook: "smirk", pain: "sad", fix: "point", cta: "smile" }, slug: "white-and-pink-noise", name: "White & Pink Noise", wave: "noise", layout: "art", art: "bw-stressed-callout",
     hook: { lines: ["TWO KINDS", "OF STATIC.", "ONE JOB EACH."], accentFrom: 2, sub: "White & pink noise, explained in 5 swipes" },
     pain: {
       head: ["NOISE ISN'T", "A MISTAKE"],
@@ -247,7 +248,7 @@ const lessons = [
     },
   },
   {
-    n: 7, slug: "complex-waveform", name: "Complex Waveform", wave: "complex", layout: "sticker",
+    n: 7, mood: { hook: "skeptical", pain: "sad", fix: "smirk", cta: "smile" }, slug: "complex-waveform", name: "Complex Waveform", wave: "complex", layout: "sticker",
     hook: { lines: ["REAL MUSIC", "NEVER LOOKS", "CLEAN"], accentFrom: 2, sub: "Complex waveforms, explained in 5 swipes" },
     pain: {
       head: ["YOUR TRACK ISN'T", "A SINE WAVE"],
@@ -287,7 +288,7 @@ const lessons = [
     },
   },
   {
-    n: 8, slug: "clipped-waveform", name: "Clipped Waveform", wave: "clipped", layout: "art", art: "color-dj-first-dance",
+    n: 8, mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "clipped-waveform", name: "Clipped Waveform", wave: "clipped", layout: "art", art: "color-dj-first-dance",
     hook: { lines: ["FLAT TOPS", "MEAN BAD", "SOUND"], accentFrom: 1, sub: "Clipped waveforms, explained in 5 swipes" },
     pain: {
       head: ["WHEN THE PEAKS", "GET CHOPPED OFF"],
@@ -327,7 +328,7 @@ const lessons = [
     },
   },
   {
-    n: 9, slug: "beat-waveform", name: "Beat Waveform", wave: "beat", layout: "sticker",
+    n: 9, mood: { hook: "serious", pain: "skeptical", fix: "smile", cta: "smirk" }, slug: "beat-waveform", name: "Beat Waveform", wave: "beat", layout: "sticker",
     hook: { lines: ["SEE THE BEAT", "BEFORE YOU", "HEAR IT"], accentFrom: 1, sub: "Beat waveform reading, explained in 5 swipes" },
     pain: {
       head: ["YOUR EARS ARE BUSY.", "YOUR EYES AREN'T."],
@@ -367,7 +368,7 @@ const lessons = [
     },
   },
   {
-    n: 10, slug: "kick-drum-waveform", name: "Kick Drum Waveform", wave: "kick", layout: "art", art: "color-dj-crowd",
+    n: 10, mood: { hook: "smirk", pain: "sad", fix: "point", cta: "smile" }, slug: "kick-drum-waveform", name: "Kick Drum Waveform", wave: "kick", layout: "art", art: "color-dj-crowd",
     hook: { lines: ["FIND THE", "KICK. FIND", "THE MIX."], accentFrom: 1, sub: "Kick drum waveform, explained in 5 swipes" },
     pain: {
       head: ["THE KICK RUNS", "THE DANCE FLOOR"],
@@ -407,7 +408,7 @@ const lessons = [
     },
   },
   {
-    n: 11, slug: "snare-and-hi-hat-waveform", name: "Snare & Hi-Hat Waveform", wave: "snare", layout: "sticker",
+    n: 11, mood: { hook: "skeptical", pain: "sad", fix: "smirk", cta: "smile" }, slug: "snare-and-hi-hat-waveform", name: "Snare & Hi-Hat Waveform", wave: "snare", layout: "sticker",
     hook: { lines: ["THE SNARE", "TELLS YOU", "WHERE YOU ARE"], accentFrom: 2, sub: "Snare & hi-hat waveforms, explained in 5 swipes" },
     pain: {
       head: ["SMALL SPIKES.", "BIG CLUES."],
@@ -447,7 +448,7 @@ const lessons = [
     },
   },
   {
-    n: 12, slug: "waveform-cheat-sheet", name: "Waveform Cheat Sheet", wave: "grid", layout: "art", art: "bw-summit", roundup: true,
+    n: 12, mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "waveform-cheat-sheet", name: "Waveform Cheat Sheet", wave: "grid", layout: "art", art: "bw-summit", roundup: true,
     hook: { lines: ["11 WAVEFORMS", "EVERY DJ", "SHOULD KNOW"], accentFrom: 1, sub: "Save this one. Study it." },
     pain: {
       head: ["KNOWLEDGE YOU", "CAN SEE"],

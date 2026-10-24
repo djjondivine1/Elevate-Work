@@ -1,0 +1,65 @@
+{
+  "skeptical": {
+    "file": "emotions/skeptical-sticker.png",
+    "cut": "right",
+    "headfrac": 0.514,
+    "size": [
+      1100,
+      1163
+    ]
+  },
+  "sad": {
+    "file": "emotions/sad-sticker.png",
+    "cut": "right",
+    "headfrac": 0.468,
+    "size": [
+      1100,
+      1104
+    ]
+  },
+  "smirk": {
+    "file": "emotions/smirk-sticker.png",
+    "cut": "none",
+    "headfrac": 0.716,
+    "size": [
+      845,
+      965
+    ]
+  },
+  "point": {
+    "file": "emotions/point-sticker.png",
+    "cut": "left",
+    "headfrac": 0.373,
+    "size": [
+      1100,
+      1241
+    ]
+  },
+  "shocked": {
+    "file": "emotions/shocked-sticker.png",
+    "cut": "left",
+    "headfrac": 0.448,
+    "size": [
+      1100,
+      1073
+    ]
+  },
+  "serious": {
+    "file": "jon-serious-sticker.png",
+    "cut": "none",
+    "headfrac": 0.431,
+    "size": [
+      786,
+      1036
+    ]
+  },
+  "smile": {
+    "file": "jon-smile-sticker.png",
+    "cut": "none",
+    "headfrac": 0.431,
+    "size": [
+      764,
+      1040
+    ]
+  }
+}
