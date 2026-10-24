@@ -3,12 +3,13 @@
 // Hook, Pain point, Struggles (what you're missing), Primary solution, CTA.
 //
 // layout: "sticker" = Jon cutout on the pain slide, "art" = framed character art on the pain slide.
-// art: file in assets/art/ (Jon's published character art).
+// gear: picture panel on the pain slide (see GEAR in build/templates.js): Jon's DDJ-REV7 / DDJ-FLX4 photos, EQ knobs, EQ waveform.
+// theme: "ivory" for the light version (default is onyx).
 // mood: which Jon expression sticker (assets/jon/manifest.json) is used on the hook, pain (sticker layout), fix and CTA slides.
 
 const lessons = [
   {
-    n: 1, mood: { hook: "serious", pain: "skeptical", fix: "smile", cta: "smirk" }, slug: "sine-wave", name: "Sine Wave", wave: "sine", layout: "sticker",
+    n: 1, theme: "ivory", mood: { hook: "serious", pain: "skeptical", fix: "smile", cta: "smirk" }, slug: "sine-wave", name: "Sine Wave", wave: "sine", layout: "sticker",
     hook: { lines: ["THE PUREST", "SOUND", "THERE IS"], accentFrom: 1, sub: "Sine wave, explained in 5 swipes" },
     pain: {
       head: ["YOU'VE HEARD IT.", "YOU CAN'T SEE IT."],
@@ -48,7 +49,7 @@ const lessons = [
     },
   },
   {
-    n: 2, mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "square-wave", name: "Square Wave", wave: "square", layout: "art", art: "color-overwhelmed",
+    n: 2, mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "square-wave", name: "Square Wave", wave: "square", layout: "art", gear: "eqwave",
     hook: { lines: ["WHY IT", "SOUNDS", "SO BUZZY"], accentFrom: 2, sub: "Square wave, explained in 5 swipes" },
     pain: {
       head: ["THE EDGE THAT", "CUTS THROUGH"],
@@ -128,7 +129,7 @@ const lessons = [
     },
   },
   {
-    n: 4, mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "sawtooth-wave", name: "Sawtooth Wave", wave: "saw", layout: "art", art: "bw-load-in",
+    n: 4, theme: "ivory", mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "sawtooth-wave", name: "Sawtooth Wave", wave: "saw", layout: "art", gear: "equip-flx4",
     hook: { lines: ["THE WAVE", "BEHIND BIG", "EDM SOUNDS"], accentFrom: 2, sub: "Sawtooth wave, explained in 5 swipes" },
     pain: {
       head: ["BRIGHT. THICK.", "EVERYWHERE."],
@@ -168,7 +169,7 @@ const lessons = [
     },
   },
   {
-    n: 5, mood: { hook: "skeptical", pain: "sad", fix: "smirk", cta: "smile" }, slug: "pulse-wave", name: "Pulse Wave", wave: "pulse", layout: "sticker",
+    n: 5, theme: "ivory", mood: { hook: "skeptical", pain: "sad", fix: "smirk", cta: "smile" }, slug: "pulse-wave", name: "Pulse Wave", wave: "pulse", layout: "sticker",
     hook: { lines: ["ONE KNOB.", "A WHOLE NEW", "SOUND"], accentFrom: 1, sub: "Pulse wave, explained in 5 swipes" },
     pain: {
       head: ["SQUARE'S MORE", "FLEXIBLE COUSIN"],
@@ -208,7 +209,7 @@ const lessons = [
     },
   },
   {
-    n: 6, mood: { hook: "smirk", pain: "sad", fix: "point", cta: "smile" }, slug: "white-and-pink-noise", name: "White & Pink Noise", wave: "noise", layout: "art", art: "bw-stressed-callout",
+    n: 6, mood: { hook: "smirk", pain: "sad", fix: "point", cta: "smile" }, slug: "white-and-pink-noise", name: "White & Pink Noise", wave: "noise", layout: "art", gear: "eqknobs-rev7",
     hook: { lines: ["TWO KINDS", "OF STATIC.", "ONE JOB EACH."], accentFrom: 2, sub: "White & pink noise, explained in 5 swipes" },
     pain: {
       head: ["NOISE ISN'T", "A MISTAKE"],
@@ -288,7 +289,7 @@ const lessons = [
     },
   },
   {
-    n: 8, mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "clipped-waveform", name: "Clipped Waveform", wave: "clipped", layout: "art", art: "color-dj-first-dance",
+    n: 8, theme: "ivory", mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "clipped-waveform", name: "Clipped Waveform", wave: "clipped", layout: "art", gear: "equip-rev7",
     hook: { lines: ["FLAT TOPS", "MEAN BAD", "SOUND"], accentFrom: 1, sub: "Clipped waveforms, explained in 5 swipes" },
     pain: {
       head: ["WHEN THE PEAKS", "GET CHOPPED OFF"],
@@ -328,7 +329,7 @@ const lessons = [
     },
   },
   {
-    n: 9, mood: { hook: "serious", pain: "skeptical", fix: "smile", cta: "smirk" }, slug: "beat-waveform", name: "Beat Waveform", wave: "beat", layout: "sticker",
+    n: 9, theme: "ivory", mood: { hook: "serious", pain: "skeptical", fix: "smile", cta: "smirk" }, slug: "beat-waveform", name: "Beat Waveform", wave: "beat", layout: "sticker",
     hook: { lines: ["SEE THE BEAT", "BEFORE YOU", "HEAR IT"], accentFrom: 1, sub: "Beat waveform reading, explained in 5 swipes" },
     pain: {
       head: ["YOUR EARS ARE BUSY.", "YOUR EYES AREN'T."],
@@ -368,7 +369,7 @@ const lessons = [
     },
   },
   {
-    n: 10, mood: { hook: "smirk", pain: "sad", fix: "point", cta: "smile" }, slug: "kick-drum-waveform", name: "Kick Drum Waveform", wave: "kick", layout: "art", art: "color-dj-crowd",
+    n: 10, mood: { hook: "smirk", pain: "sad", fix: "point", cta: "smile" }, slug: "kick-drum-waveform", name: "Kick Drum Waveform", wave: "kick", layout: "art", gear: "rev7-full",
     hook: { lines: ["FIND THE", "KICK. FIND", "THE MIX."], accentFrom: 1, sub: "Kick drum waveform, explained in 5 swipes" },
     pain: {
       head: ["THE KICK RUNS", "THE DANCE FLOOR"],
@@ -448,7 +449,7 @@ const lessons = [
     },
   },
   {
-    n: 12, mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "waveform-cheat-sheet", name: "Waveform Cheat Sheet", wave: "grid", layout: "art", art: "bw-summit", roundup: true,
+    n: 12, theme: "ivory", mood: { hook: "shocked", pain: "sad", fix: "point", cta: "smile" }, slug: "waveform-cheat-sheet", name: "Waveform Cheat Sheet", wave: "grid", layout: "art", gear: "both", roundup: true,
     hook: { lines: ["11 WAVEFORMS", "EVERY DJ", "SHOULD KNOW"], accentFrom: 1, sub: "Save this one. Study it." },
     pain: {
       head: ["KNOWLEDGE YOU", "CAN SEE"],
@@ -477,7 +478,7 @@ const lessons = [
   },
   // ---------------- Mix Lab (series 2) ----------------
   {
-    n: 13, mood: { hook: "smirk", pain: "sad", fix: "point", cta: "smile" }, series: "Mix Lab", sn: 1, stotal: 5,
+    n: 13, theme: "ivory", mood: { hook: "smirk", pain: "sad", fix: "point", cta: "smile" }, series: "Mix Lab", sn: 1, stotal: 6,
     slug: "quick-cut-transition", name: "Quick Cut Transition", wave: "cut", layout: "sticker",
     hook: { lines: ["CUT IT CLEAN.", "NO BLEND.", "NO FEAR."], accentFrom: 1, sub: "Quick cut transition, explained in 5 swipes" },
     pain: {
@@ -518,8 +519,8 @@ const lessons = [
     },
   },
   {
-    n: 14, mood: { hook: "skeptical", pain: "sad", fix: "smile", cta: "smirk" }, series: "Mix Lab", sn: 2, stotal: 5,
-    slug: "midrange-vocal-separation", name: "Midrange Vocal Separation", wave: "spectrum", layout: "art", art: "color-overwhelmed",
+    n: 14, mood: { hook: "skeptical", pain: "sad", fix: "smile", cta: "smirk" }, series: "Mix Lab", sn: 2, stotal: 6,
+    slug: "midrange-vocal-separation", name: "Midrange Vocal Separation", wave: "spectrum", layout: "art", gear: "eqknobs-flx4",
     hook: { lines: ["MAKE ROOM", "FOR THE", "VOCALS"], accentFrom: 1, sub: "Midrange vocal separation, explained in 5 swipes" },
     pain: {
       head: ["WHY CAN'T YOU", "HEAR THE VOCAL?"],
@@ -559,7 +560,7 @@ const lessons = [
     },
   },
   {
-    n: 15, mood: { hook: "shocked", pain: "sad", fix: "smirk", cta: "smile" }, series: "Mix Lab", sn: 3, stotal: 5,
+    n: 15, mood: { hook: "shocked", pain: "sad", fix: "smirk", cta: "smile" }, series: "Mix Lab", sn: 3, stotal: 6,
     slug: "resonance-control", name: "Resonance Control", wave: "resonance", layout: "sticker",
     hook: { lines: ["THE KNOB THAT", "MAKES FILTERS", "SING"], accentFrom: 1, sub: "Resonance, explained in 5 swipes" },
     pain: {
@@ -600,8 +601,8 @@ const lessons = [
     },
   },
   {
-    n: 16, mood: { hook: "serious", pain: "skeptical", fix: "point", cta: "smile" }, series: "Mix Lab", sn: 4, stotal: 5,
-    slug: "eq-and-filter-combo", name: "EQ and Filter Combo", wave: "eqfilter", layout: "art", art: "bw-stressed-callout",
+    n: 16, theme: "ivory", mood: { hook: "serious", pain: "skeptical", fix: "point", cta: "smile" }, series: "Mix Lab", sn: 4, stotal: 6,
+    slug: "eq-and-filter-combo", name: "EQ and Filter Combo", wave: "eqfilter", layout: "art", gear: "flx4-full",
     hook: { lines: ["EQ + FILTER:", "THE CLEAN", "MIX COMBO"], accentFrom: 1, sub: "EQ and filter together, explained in 5 swipes" },
     pain: {
       head: ["TWO TRACKS.", "ONE CROWDED MIX."],
@@ -641,7 +642,7 @@ const lessons = [
     },
   },
   {
-    n: 17, mood: { hook: "smile", pain: "skeptical", fix: "point", cta: "smirk" }, series: "Mix Lab", sn: 5, stotal: 5,
+    n: 17, mood: { hook: "smile", pain: "skeptical", fix: "point", cta: "smirk" }, series: "Mix Lab", sn: 5, stotal: 6,
     slug: "old-song-to-modern-remix", name: "Old Song to Modern Remix", wave: "remix", layout: "sticker",
     hook: { lines: ["OLD SONG.", "NEW LIFE.", "ONE REMIX."], accentFrom: 1, sub: "Old song to modern remix, explained in 5 swipes" },
     pain: {
@@ -681,6 +682,91 @@ const lessons = [
       remember: "Keep the heart. Rebuild the groove.",
     },
   },
+  {
+    n: 18, theme: "ivory", mood: { hook: "serious", pain: "skeptical", fix: "smile", cta: "smirk" }, series: "Mix Lab", sn: 6, stotal: 6,
+    slug: "dj-download-stores", name: "DJ Download Stores", wave: "beat", layout: "sticker", kind: "stores",
+    hook: { lines: ["WHERE SMART", "DJS BUY", "THEIR MUSIC"], accentFrom: 1, sub: "9 DJ download stores and pools, compared" },
+    pain: {
+      head: ["STOP GRABBING", "RANDOM FILES"],
+      body: "Low-quality files and missing edits can wreck a set in the middle of the night. Working DJs buy from stores and pools built for DJs, with clean edits, solid quality and proper tags.",
+    },
+    groups: [
+      {
+        tag: "STORES 1 TO 3", head: ["CLUB + HOUSE", "STORES"],
+        items: [
+          { n: 1, name: "Beatport", tag: "The big electronic music store for DJs and producers.", genres: ["TECHNO", "HOUSE", "EDM", "MELODIC", "DRUM & BASS"],
+            pts: ["High-quality files, usually 320 kbps or WAV", "Extended mixes, remixes and edits", "Built for club and festival DJs"] },
+          { n: 2, name: "Traxsource", tag: "A house music store with exclusive releases.", genres: ["HOUSE", "DEEP HOUSE", "AFRO HOUSE", "SOULFUL", "TECH HOUSE"],
+            pts: ["High-quality tracks and exclusive edits", "Classic and underground house", "Strong deep, Afro and soulful focus"] },
+          { n: 3, name: "Juno Download", tag: "A massive music store for all genres.", genres: ["AFRO HOUSE", "HOUSE", "TECHNO", "TRANCE", "EDM"],
+            pts: ["WAV and FLAC files available", "Latest and classic releases", "Buy per track or per album"] },
+        ],
+      },
+      {
+        tag: "STORES 4 TO 6", head: ["OPEN-FORMAT", "POOLS"],
+        items: [
+          { n: 4, name: "DJ City", tag: "A subscription pool for DJs across every genre.", genres: ["AFRO BEAT", "HIP-HOP", "R&B", "POP", "EDM"],
+            pts: ["Clean versions and radio edits", "Intro and outro edits, remixes, acapellas", "Updated regularly, great for mobile DJs"] },
+          { n: 5, name: "ZipDJ", tag: "A multi-genre pool for working DJs.", genres: ["AFRO HOUSE", "AFROBEAT", "EDM", "POP", "LATIN"],
+            pts: ["Huge Afrobeat selection", "Intros, outros, remixes and acapellas", "Updated daily"] },
+          { n: 6, name: "BPM Supreme", tag: "A premium open-format pool.", genres: ["AFROBEATS", "HIP-HOP", "R&B", "EDM", "DANCE"],
+            pts: ["Clean, dirty and extended versions", "Exclusive remixes and edits", "Solid metadata for club, mobile and radio DJs"] },
+        ],
+      },
+      {
+        tag: "STORES 7 TO 9", head: ["INDIE + EXTRA", "SOURCES"],
+        items: [
+          { n: 7, name: "SoundCloud", tag: "Remixes, bootlegs and emerging artists.", genres: ["EDITS", "BOOTLEGS", "REMIXES", "AFRO EDITS"],
+            pts: ["Some free downloads, when artists allow them", "Fresh remixes and new artists", "Handy for edits and transitions"] },
+          { n: 8, name: "Bandcamp", tag: "Independent artists, paid directly.", genres: ["AFROBEAT", "DEEP AFRO", "MINIMAL", "EXPERIMENTAL"],
+            pts: ["Your money goes straight to the artist", "WAV and FLAC files", "Great for music nobody else plays"] },
+          { n: 9, name: "Promo Only", tag: "A pro pool for current, mainstream music.", genres: ["AFRO", "HIP-HOP", "R&B", "DANCE", "AFROBEATS"],
+            pts: ["Clean versions and radio edits", "Latest chart releases", "Made for mobile, club and radio DJs"] },
+        ],
+      },
+    ],
+    compare: {
+      head: ["WHICH STORE", "FOR WHICH DJ?"],
+      cols: ["Store", "Best for", "Main sound", "Quality"],
+      rows: [
+        ["Beatport", "Club and festival", "Electronic, techno, house", "320 kbps / WAV"],
+        ["Traxsource", "House DJs", "Afro house, deep house", "320 kbps / WAV"],
+        ["Juno Download", "All genres", "Afro house, techno", "WAV / AIFF"],
+        ["DJ City", "Open-format DJs", "All-round", "320 kbps / WAV"],
+        ["ZipDJ", "All-round DJs", "Afro house, pop, EDM", "320 kbps / WAV"],
+        ["BPM Supreme", "Open-format DJs", "Hip-hop, pop, R&B", "320 kbps / WAV"],
+        ["SoundCloud", "Remixes and edits", "All genres", "Varies"],
+        ["Bandcamp", "Independent music", "Afro house, minimal", "WAV / FLAC"],
+        ["Promo Only", "Mobile and radio", "Mainstream, pop", "320 kbps / WAV"],
+      ],
+      note: "Formats and plans change. Check each store before you buy.",
+    },
+    fix: {
+      head: ["BUILD A", "CLEAN CRATE"],
+      callout: "Buy legal, buy high quality, and organize as you go.",
+      steps: [
+        "Buy from official, legal stores and pools.",
+        "Download the best quality you can: 320 kbps or WAV.",
+        "Tag every track and build playlists by genre, mood and event.",
+        "Back up your library every month.",
+      ],
+    },
+    pdf: {
+      tips: [
+        "Buy from official, legal sources only.",
+        "Keep your software and drives safe from risky downloads.",
+        "Download 320 kbps MP3 or WAV, the best you can.",
+        "Use WAV for club and festival systems.",
+        "Tag artist, title, key and BPM on every track.",
+        "Fix missing edits and metadata as you go.",
+        "Build playlists by genre, mood and event type.",
+        "Back up monthly, to a drive and the cloud.",
+        "Check for new releases on a schedule.",
+        "Follow copyright and license rules.",
+      ],
+      remember: "Buy legal. Buy quality. Keep it organized.",
+    },
+  },
 ];
 
 // One-line takeaways used on the roundup grid and the cheat sheet PDF.
@@ -715,6 +801,23 @@ function caption(l) {
       "",
       `${HANDLE}`,
       HASHTAGS,
+    ].join("\n");
+  }
+  if (l.kind === "stores") {
+    const names = l.groups.flatMap((g) => g.items).sort((x, y) => x.n - y.n).map((x) => x.name).join(" / ");
+    return [
+      `${first}. ${l.hook.sub}.`,
+      "",
+      names,
+      "",
+      l.pain.body,
+      "",
+      `Do this: ${l.fix.callout}`,
+      "",
+      "Want more lessons like this? Join Elevate DJ Academy. It's free. Link in bio.",
+      "",
+      `${HANDLE}`,
+      "#elevatedjacademy #djtips #djmusic #djpool #beatport #djlife #djcommunity",
     ].join("\n");
   }
   return [

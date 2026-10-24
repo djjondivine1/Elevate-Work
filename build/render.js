@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const { chromium } = require("playwright");
 const { lessons, caption } = require("../content/lessons");
-const { SLIDES, pdfLesson, pdfRoundup } = require("./templates");
+const { slidesFor, pdfLesson, pdfRoundup, pdfStores } = require("./templates");
 
 const ROOT = path.resolve(__dirname, "..");
 const TMP = path.join(ROOT, "build", "tmp");
@@ -30,7 +30,7 @@ const fmtOnly = args.includes("--fmt") ? args[args.indexOf("--fmt") + 1] : null;
       const [w, h] = sizes[fmt];
       fs.mkdirSync(path.join(dir, fmt), { recursive: true });
       await page.setViewportSize({ width: w, height: h });
-      for (const [name, fn] of SLIDES) {
+      for (const [name, fn] of slidesFor(l)) {
         const html = fn(l, fmt);
         const f = path.join(TMP, `${l.slug}-${fmt}-${name}.html`);
         fs.writeFileSync(f, html);
@@ -50,7 +50,7 @@ const fmtOnly = args.includes("--fmt") ? args[args.indexOf("--fmt") + 1] : null;
     }
     if (!fmtOnly || fmtOnly === "pdf") {
       const idx = lessons.indexOf(l);
-      const html = l.roundup ? pdfRoundup(l) : pdfLesson(l, lessons[idx + 1] && !lessons[idx + 1].roundup ? lessons[idx + 1] : null);
+      const html = l.kind === "stores" ? pdfStores(l) : l.roundup ? pdfRoundup(l) : pdfLesson(l, lessons[idx + 1] && !lessons[idx + 1].roundup ? lessons[idx + 1] : null);
       const f = path.join(TMP, `${l.slug}-pdf.html`);
       fs.writeFileSync(f, html);
       await page.setViewportSize({ width: 816, height: 1056 });

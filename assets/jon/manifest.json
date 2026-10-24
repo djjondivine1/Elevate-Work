@@ -6,7 +6,8 @@
     "size": [
       1100,
       1163
-    ]
+    ],
+    "file_gold": "emotions/skeptical-sticker-gold.png"
   },
   "sad": {
     "file": "emotions/sad-sticker.png",
@@ -15,7 +16,8 @@
     "size": [
       1100,
       1104
-    ]
+    ],
+    "file_gold": "emotions/sad-sticker-gold.png"
   },
   "smirk": {
     "file": "emotions/smirk-sticker.png",
@@ -24,7 +26,8 @@
     "size": [
       845,
       965
-    ]
+    ],
+    "file_gold": "emotions/smirk-sticker-gold.png"
   },
   "point": {
     "file": "emotions/point-sticker.png",
@@ -33,7 +36,8 @@
     "size": [
       1100,
       1241
-    ]
+    ],
+    "file_gold": "emotions/point-sticker-gold.png"
   },
   "shocked": {
     "file": "emotions/shocked-sticker.png",
@@ -42,7 +46,8 @@
     "size": [
       1100,
       1073
-    ]
+    ],
+    "file_gold": "emotions/shocked-sticker-gold.png"
   },
   "serious": {
     "file": "jon-serious-sticker.png",
@@ -51,7 +56,8 @@
     "size": [
       786,
       1036
-    ]
+    ],
+    "file_gold": "jon-serious-sticker-gold.png"
   },
   "smile": {
     "file": "jon-smile-sticker.png",
@@ -60,6 +66,7 @@
     "size": [
       764,
       1040
-    ]
+    ],
+    "file_gold": "jon-smile-sticker-gold.png"
   }
 }

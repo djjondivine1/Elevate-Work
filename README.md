@@ -3,17 +3,23 @@
 ## Carousels, stories and PDFs for the free academy
 
 Two series, rebuilt in Elevate's branding and Jon's coach voice:
-**Waveform Lab** (11 lessons plus a cheat sheet) and **Mix Lab** (5 mixing lessons).
+**Waveform Lab** (11 lessons plus a cheat sheet) and **Mix Lab** (6 mixing lessons).
+Nine lessons use the ivory theme and nine use onyx, so the feed alternates. Every picture is Jon or DJ gear
+(DDJ-REV7, DDJ-FLX4, EQ waveforms, EQ knobs); no family or meeting photos.
 Every lesson ships as:
 
 | Format | Size | Where |
 |---|---|---|
-| IG carousel, 5 slides (Hook, Pain, Struggles, Solution, CTA) | 1080 x 1350 PNG | `output/<lesson>/feed/` |
+| IG carousel, 5 slides (Hook, Pain, Struggles, Solution, CTA); lesson 18 has 8 | 1080 x 1350 PNG | `output/<lesson>/feed/` |
 | IG story set, same 5 slides, kept inside the story safe zones | 1080 x 1920 PNG | `output/<lesson>/story/` |
 | Academy PDF (Letter, 2 pages: lesson sheet + practice and check) | 8.5 x 11 in | `output/<lesson>/<lesson>.pdf` |
 | Caption (hook, promise, action, CTA, hashtags) | text | `output/<lesson>/caption.txt` |
 
-Quick look: `output/_overview/` has one contact sheet per lesson and `all-hooks.jpg`.
+Quick look: `output/_overview/` has one contact sheet per lesson, `all-hooks.jpg`, `all-stories-hooks.jpg` and the
+`set-ivory` / `set-onyx` sheets (rebuild with `python3 tools/overview.py`).
+
+Ivory lessons: 01, 04, 05, 08, 09, 12, 13, 16, 18. Onyx lessons: 02, 03, 06, 07, 10, 11, 14, 15, 17.
+Set `theme: "ivory"` on a lesson in `content/lessons.js` to flip it.
 
 | # | Lesson |
 |---|---|
@@ -29,11 +35,12 @@ Quick look: `output/_overview/` has one contact sheet per lesson and `all-hooks.
 | 10 | Kick drum waveform |
 | 11 | Snare and hi-hat waveform |
 | 12 | Waveform cheat sheet (roundup, plus an 11-day plan PDF) |
-| 13 | Quick cut transition (Mix Lab 1 of 5) |
-| 14 | Midrange vocal separation (Mix Lab 2 of 5) |
-| 15 | Resonance control (Mix Lab 3 of 5) |
-| 16 | EQ and filter combo (Mix Lab 4 of 5) |
-| 17 | Old song to modern remix (Mix Lab 5 of 5) |
+| 13 | Quick cut transition (Mix Lab 1 of 6) |
+| 14 | Midrange vocal separation (Mix Lab 2 of 6) |
+| 15 | Resonance control (Mix Lab 3 of 6) |
+| 16 | EQ and filter combo (Mix Lab 4 of 6) |
+| 17 | Old song to modern remix (Mix Lab 5 of 6) |
+| 18 | DJ download stores and pools (Mix Lab 6 of 6, ivory, 8 slides) |
 
 ### Brand rules applied
 
@@ -70,7 +77,8 @@ Needs Node with `playwright` (Chromium). Output goes to `output/`. Layout warnin
 - `assets/jon`: Jon's headshots plus the white-outline sticker cutouts.
 - `assets/jon/emotions`: Jon's expressions (skeptical, sad, smirk, pointing, shocked) as plain cutouts and sticker versions.
   `assets/jon/manifest.json` lists every sticker (which frame edge is cut, head size) so the templates place each one correctly.
-- `assets/art`: Jon's character scenes, cropped from his published carousels.
+- `assets/gear`: the DDJ-REV7 and DDJ-FLX4 photos (full and transparent cutouts) plus logo-free close-ups of the EQ knobs, pads, jogs and faders.
+  Each lesson picks a panel with `gear: "<key>"` (see `GEAR` in `build/templates.js`).
 - `tools/`: contact-sheet helpers and the Drive decode helper.
 
 ### Jon's expressions
@@ -84,11 +92,9 @@ these were cut from the six published thumbnails (`tools/make_emotions.py`). To 
 `assets/jon/emotions/` and add them to `assets/jon/manifest.json` (file, `cut` edge, `headfrac`), then set the new
 name as a lesson's `mood`.
 
-### Adding more of Jon's art
+### Adding more gear pictures
 
-Drop new character images in `assets/art/` (landscape, about 4:3), then set `layout: "art"` and
-`art: "<file-name-without-extension>"` on a lesson in `content/lessons.js`. For another pose of Jon,
-add a sticker cutout to `assets/jon/` and reference it in `build/templates.js`.
+Drop a photo in `assets/gear/`, add an entry to `GEAR` in `build/templates.js`, then set `gear: "<key>"` on a lesson.
 
 ### Notes on what was and wasn't available
 

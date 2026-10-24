@@ -423,6 +423,32 @@ function draw(type, opts = {}) {
     }
   }
 
+  if (type === "eqcurve") {
+    // spectrum bars behind a gold EQ curve with three adjustable bands
+    const r = rng(77), n = mini ? 40 : 84, baseY = h * 0.80, topY = h * 0.14;
+    const items = [];
+    for (let i = 0; i < n; i++) {
+      const t = i / (n - 1), shape = 0.95 * Math.exp(-t * 2.4) + 0.22 + 0.18 * Math.exp(-(((t - 0.55) / 0.12) ** 2));
+      const a = (baseY - topY) * 0.5 * Math.min(1, shape) * (0.55 + r() * 0.45);
+      items.push({ x: X0 + t * W, a, wd: W / n * 0.62, color: "dim", op: 0.55 });
+    }
+    const mid0 = (baseY + topY) / 2;
+    // bars hang from the baseline: draw as rects anchored at baseY
+    body += items.map((b) => `<rect x="${f(b.x - b.wd / 2)}" y="${f(baseY - b.a * 2)}" width="${f(b.wd)}" height="${f(b.a * 2)}" rx="3" fill="${th.dim}" opacity="0.38"/>`).join("");
+    body += `<line x1="${X0}" y1="${f(baseY)}" x2="${X1}" y2="${f(baseY)}" stroke="${th.base}" stroke-width="1.5"/>`;
+    const nodes = [[0.13, 0.55, "LOW"], [0.50, -0.55, "MID"], [0.86, 0.40, "HIGH"]];
+    const gain = (t) => nodes.reduce((a, [c, g]) => a + g * Math.exp(-(((t - c) / 0.14) ** 2)), 0);
+    const pts = [];
+    for (let i = 0; i <= 200; i++) { const t = i / 200; pts.push([X0 + t * W, mid0 - gain(t) * (baseY - topY) * 0.46]); }
+    if (annot) body += `<line x1="${X0}" y1="${f(mid0)}" x2="${X1}" y2="${f(mid0)}" stroke="${th.base}" stroke-width="1.5" stroke-dasharray="3 7"/>`;
+    body += trace(id, polyline(pts), th, sw * 1.1);
+    nodes.forEach(([c, g, nm]) => {
+      const x = X0 + c * W, y = mid0 - g * (baseY - topY) * 0.46;
+      body += `<circle cx="${f(x)}" cy="${f(y)}" r="${mini ? 7 : 12}" fill="#121214" stroke="url(#g${id})" stroke-width="4"/>`;
+      if (annot) body += text(x, baseY + fs + 8, nm, th, { size: fs - 2, fill: th.ink });
+    });
+  }
+
   if (type === "remix") {
     const r = rng(41), hh = mini ? h * 0.30 : h * 0.26, step = mini ? 13 : 14, bw = mini ? 6 : 7;
     const mY = annot ? h * 0.50 : mid, half = W * 0.43, midX = X0 + W / 2;
