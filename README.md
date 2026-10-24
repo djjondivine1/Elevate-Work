@@ -1,8 +1,9 @@
 # Elevate Work
 
-## Waveform Lab: carousels, stories and PDFs for the free academy
+## Carousels, stories and PDFs for the free academy
 
-Eleven waveform lessons plus a cheat sheet, rebuilt in Elevate's branding and Jon's coach voice.
+Two series, rebuilt in Elevate's branding and Jon's coach voice:
+**Waveform Lab** (11 lessons plus a cheat sheet) and **Mix Lab** (5 mixing lessons).
 Every lesson ships as:
 
 | Format | Size | Where |
@@ -28,6 +29,11 @@ Quick look: `output/_overview/` has one contact sheet per lesson and `all-hooks.
 | 10 | Kick drum waveform |
 | 11 | Snare and hi-hat waveform |
 | 12 | Waveform cheat sheet (roundup, plus an 11-day plan PDF) |
+| 13 | Quick cut transition (Mix Lab 1 of 5) |
+| 14 | Midrange vocal separation (Mix Lab 2 of 5) |
+| 15 | Resonance control (Mix Lab 3 of 5) |
+| 16 | EQ and filter combo (Mix Lab 4 of 5) |
+| 17 | Old song to modern remix (Mix Lab 5 of 5) |
 
 ### Brand rules applied
 

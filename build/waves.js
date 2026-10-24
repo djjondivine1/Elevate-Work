@@ -324,6 +324,126 @@ function draw(type, opts = {}) {
     }
   }
 
+
+  // ---- Mix Lab diagrams ----
+  const fxLog = (f) => X0 + ((Math.log10(f) - 1.30103) / 3) * W; // 20 Hz .. 20 kHz on a log axis
+  const pill = (x, y, label, size) => {
+    const wd = label.length * (size * 0.72) + 26, ht = size + 14;
+    return `<rect x="${f(x - wd / 2)}" y="${f(y - ht / 2)}" width="${f(wd)}" height="${f(ht)}" rx="8" fill="#C9954B"/>` +
+      `<text x="${f(x)}" y="${f(y + size * 0.36)}" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="${size}" letter-spacing="2" fill="#121214">${label}</text>`;
+  };
+
+  if (type === "cut") {
+    const r = rng(31), cutX = X0 + W * 0.56;
+    const rowA = mini ? mid : h * 0.30, rowB = mini ? mid : h * 0.64, hh = mini ? h * 0.30 : h * 0.14;
+    const step = mini ? 15 : 16, bw = mini ? 6 : 8;
+    const A1 = [], B1 = [];
+    for (let x = X0 + 6, k = 0; x < X1; x += step, k++) {
+      const beat = k % 8 === 0, a = hh * (beat ? 1 : 0.26 + r() * 0.5);
+      if (x < cutX - 5) A1.push({ x, a, wd: bw, color: "gold", op: beat ? 1 : 0.85 });
+      else if (x > cutX + 5) B1.push({ x, a, wd: bw, color: "ink", op: beat ? 1 : 0.85 });
+    }
+    if (annot) {
+      body += `<line x1="${f(cutX + 6)}" y1="${f(rowA)}" x2="${X1}" y2="${f(rowA)}" stroke="${th.base}" stroke-width="2" stroke-dasharray="3 7"/>`;
+      body += `<line x1="${X0}" y1="${f(rowB)}" x2="${f(cutX - 6)}" y2="${f(rowB)}" stroke="${th.base}" stroke-width="2" stroke-dasharray="3 7"/>`;
+    }
+    body += bars(id, A1, rowA, th, 3) + bars(id, B1, rowB, th, 3);
+    body += `<line x1="${f(cutX)}" y1="${annot ? 22 : 4}" x2="${f(cutX)}" y2="${annot ? h * 0.82 : h - 4}" stroke="#F6DDA6" stroke-width="${mini ? 3 : 3.5}" stroke-dasharray="${mini ? "0" : "9 7"}" stroke-linecap="round"/>`;
+    if (annot) {
+      body += pill(cutX, 16, "CUT", fs - 3);
+      body += text(X0, rowA - hh - 8, "TRACK A: PLAYING", th, { anchor: "start", size: fs - 2 });
+      body += text(X1, rowB - hh - 8, "TRACK B: NEXT", th, { anchor: "end", size: fs - 2 });
+      body += text(X0 + W / 2, h * 0.93, "SAME BEAT. NO BLEND. NO OVERLAP.", th, { size: fs - 2, fill: th.ink });
+    }
+  }
+
+  if (type === "spectrum") {
+    const baseY = mini ? h * 0.9 : h * 0.70, AH = mini ? h * 0.72 : h * 0.50;
+    const bandsAll = [[60, 0.30, "BASS", false], [300, 0.26, "LOW MID", false], [1000, 0.30, "MID", true], [3000, 0.24, "HIGH MID", true], [10000, 0.28, "AIR", false]];
+    const bands = mini ? bandsAll.filter((b) => b[3]) : bandsAll;
+    if (annot) {
+      const a = fxLog(500), b = fxLog(4000);
+      body += `<rect x="${f(a)}" y="${f(h * 0.10)}" width="${f(b - a)}" height="${f(baseY - h * 0.10)}" rx="10" fill="#C9954B" opacity="0.10"/>`;
+      body += text((a + b) / 2, baseY - AH - 8, "VOCAL ZONE", th, { size: fs - 3, fill: th.ink });
+      body += `<line x1="${X0}" y1="${f(baseY)}" x2="${X1}" y2="${f(baseY)}" stroke="${th.base}" stroke-width="1.5"/>`;
+    }
+    bands.forEach(([c, s0, name, hot]) => {
+      const pts = [];
+      for (let i = 0; i <= 160; i++) {
+        const lf = 1.30103 + (i / 160) * 3;
+        pts.push([X0 + (i / 160) * W, baseY - AH * Math.exp(-(((lf - Math.log10(c)) / s0) ** 2))]);
+      }
+      const d = polyline(pts);
+      if (hot) {
+        body += `<path d="${d} L${f(X1)} ${f(baseY)} L${f(X0)} ${f(baseY)} Z" fill="url(#g${id})" opacity="0.32"/>`;
+        body += trace(id, d, th, sw * 0.8);
+      } else {
+        body += `<path d="${d}" fill="none" stroke="${th.ghost}" stroke-width="${sw * 0.55}" stroke-linejoin="round"/>`;
+      }
+      if (annot && !hot) body += text(fxLog(c), baseY - AH - 8, name, th, { size: fs - 4, fill: th.dim });
+    });
+    if (annot) [[20, "20"], [100, "100"], [500, "500"], [1000, "1K"], [5000, "5K"], [20000, "20K"]].forEach(([fr, lb]) => {
+      body += text(Math.min(Math.max(fxLog(fr), X0 + 6), X1 - 10), baseY + fs + 8, lb, th, { size: fs - 3 });
+    });
+    if (annot) body += text(X0 + W / 2, h * 0.98, "FREQUENCY (HZ)", th, { size: fs - 4 });
+  }
+
+  if (type === "resonance") {
+    const fc = 1000, top = h * (annot ? 0.20 : 0.10), plotH = h * (annot ? 0.62 : 0.80);
+    const mag = (fr, Q) => { const x = fr / fc; return 1 / Math.sqrt((1 - x * x) ** 2 + (x / Q) ** 2); };
+    const yDb = (db) => top + ((20 - db) / 74) * plotH;
+    const mk = (Q) => { const pts = []; for (let i = 0; i <= 220; i++) { const lf = 1.30103 + (i / 220) * 3; const db = Math.max(-54, 20 * Math.log10(mag(Math.pow(10, lf), Q))); pts.push([X0 + (i / 220) * W, yDb(db)]); } return polyline(pts); };
+    if (annot) {
+      body += `<line x1="${f(fxLog(fc))}" y1="${f(top - 6)}" x2="${f(fxLog(fc))}" y2="${f(top + plotH)}" stroke="${th.ink}" stroke-width="2" stroke-dasharray="8 7" opacity="0.5"/>`;
+      body += `<line x1="${X0}" y1="${f(yDb(0))}" x2="${X1}" y2="${f(yDb(0))}" stroke="${th.base}" stroke-width="1.5" stroke-dasharray="3 7"/>`;
+      body += text(fxLog(fc), top + plotH + fs + 8, "CUTOFF", th, { size: fs - 3, fill: th.ink });
+      const lg = (x, c, lab) => `<rect x="${x}" y="${f(h * 0.045)}" width="30" height="5" rx="2.5" fill="${c}"/>` + text(x + 40, h * 0.045 + 12, lab, th, { anchor: "start", size: fs - 3 });
+      body += lg(X0, th.ghost, "LOW Q") + lg(X0 + 170, th.ink, "MEDIUM Q") + lg(X0 + 390, `url(#g${id})`, "HIGH Q: SHARP PEAK");
+    }
+    body += `<path d="${mk(0.707)}" fill="none" stroke="${th.ghost}" stroke-width="${sw * 0.7}" stroke-linejoin="round" ${annot ? 'stroke-dasharray="3 7" stroke-linecap="round"' : ""}/>`;
+    if (!mini) body += `<path d="${mk(2.2)}" fill="none" stroke="${th.ink}" stroke-width="${sw * 0.7}" stroke-linejoin="round"/>`;
+    body += trace(id, mk(7), th, sw * 0.9);
+  }
+
+  if (type === "eqfilter") {
+    const top = h * (annot ? 0.28 : 0.12), plotH = h * (annot ? 0.48 : 0.74);
+    const lp = (fr) => 1 / Math.sqrt(1 + Math.pow(fr / 4000, 4));
+    const hp = (fr) => { const x = fr / 250; return (x * x) / Math.sqrt(1 + Math.pow(x, 4)); };
+    const mk = (fn, k) => { const pts = []; for (let i = 0; i <= 200; i++) { const lf = 1.30103 + (i / 200) * 3; pts.push([X0 + (i / 200) * W, top + (1 - fn(Math.pow(10, lf)) * k) * plotH]); } return polyline(pts); };
+    if (annot) body += `<line x1="${X0}" y1="${f(top + plotH)}" x2="${X1}" y2="${f(top + plotH)}" stroke="${th.base}" stroke-width="1.5"/>`;
+    const dl = mk(lp, 0.9);
+    body += `<path d="${dl}" fill="none" stroke="${th.ink}" stroke-width="${sw * 0.8}" stroke-dasharray="${annot ? "12 8" : "0"}" stroke-linecap="round" stroke-linejoin="round"/>`;
+    const dh = mk(hp, 1.0);
+    body += `<path d="${dh} L${f(X1)} ${f(top + plotH)} L${f(X0)} ${f(top + plotH)} Z" fill="url(#g${id})" opacity="0.18"/>` + trace(id, dh, th, sw * 0.9);
+    if (annot) {
+      const ly = h * 0.09, mx = X0 + W * 0.52;
+      body += `<rect x="${f(X0)}" y="${f(ly - 3)}" width="30" height="6" rx="3" fill="url(#g${id})"/>` + text(X0 + 40, ly + 6, "INCOMING: HIGH-PASS", th, { anchor: "start", size: fs - 3, fill: th.ink });
+      body += `<line x1="${f(mx)}" y1="${f(ly)}" x2="${f(mx + 30)}" y2="${f(ly)}" stroke="${th.ink}" stroke-width="5" stroke-dasharray="6 4"/>` + text(mx + 40, ly + 6, "OUTGOING: LOW-PASS", th, { anchor: "start", size: fs - 3, fill: th.ink });
+      [[60, "LOWS"], [1000, "MIDS"], [10000, "HIGHS"]].forEach(([fr, lb]) => { body += text(fxLog(fr), top + plotH + fs + 10, lb, th, { size: fs - 2, fill: th.ink }); });
+    }
+  }
+
+  if (type === "remix") {
+    const r = rng(41), hh = mini ? h * 0.30 : h * 0.26, step = mini ? 13 : 14, bw = mini ? 6 : 7;
+    const mY = annot ? h * 0.50 : mid, half = W * 0.43, midX = X0 + W / 2;
+    const L = [], R = [];
+    for (let x = X0 + 4, k = 0; x < X0 + half; x += step, k++) L.push({ x, a: hh * (0.16 + r() * 0.12), wd: bw, color: "dim", op: 0.8 });
+    const nR = Math.floor(half / step);
+    for (let k = 0; k < nR; k++) {
+      const x = X1 - half + 4 + k * step, t = k / nR;
+      let env = t < 0.42 ? 0.25 + t * 1.3 : t < 0.55 ? 0.18 : 0.75 + (k % 4 === 0 ? 0.25 : 0);
+      R.push({ x, a: hh * Math.min(1, env) * (0.78 + r() * 0.22), wd: bw, color: "gold" });
+    }
+    body += bars(id, L, mY, th, 3) + bars(id, R, mY, th, 3);
+    for (let i = 0; i < 3; i++) body += `<path d="M${f(midX - 22 + i * 17)} ${f(mY - 15)} L${f(midX - 9 + i * 17)} ${f(mY)} L${f(midX - 22 + i * 17)} ${f(mY + 15)}" fill="none" stroke="#D9A95C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
+    if (annot) {
+      body += text(X0, mY - hh - 12, "OLD SONG", th, { anchor: "start", size: fs - 1, fill: th.ink });
+      body += text(X1, mY - hh - 12, "MODERN REMIX", th, { anchor: "end", size: fs - 1, fill: th.ink });
+      body += text(X0, mY + hh + fs + 10, "FLAT. LOW ENERGY.", th, { anchor: "start", size: fs - 3 });
+      body += text(X1, mY + hh + fs + 10, "PUNCHY. BIG DROP.", th, { anchor: "end", size: fs - 3 });
+    }
+  }
+
   return wrap(id, w, h, th, body);
 }
 

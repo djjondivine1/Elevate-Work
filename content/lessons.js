@@ -475,6 +475,212 @@ const lessons = [
       remember: "One waveform a day. Eleven days. Then you read every track faster.",
     },
   },
+  // ---------------- Mix Lab (series 2) ----------------
+  {
+    n: 13, mood: { hook: "smirk", pain: "sad", fix: "point", cta: "smile" }, series: "Mix Lab", sn: 1, stotal: 5,
+    slug: "quick-cut-transition", name: "Quick Cut Transition", wave: "cut", layout: "sticker",
+    hook: { lines: ["CUT IT CLEAN.", "NO BLEND.", "NO FEAR."], accentFrom: 1, sub: "Quick cut transition, explained in 5 swipes" },
+    pain: {
+      head: ["NOT EVERY MIX", "NEEDS A BLEND"],
+      body: "A long blend can kill the punch of a drop. A quick cut switches tracks instantly, on the beat, with no overlap and no effects. Done right, it sounds sharp and on purpose.",
+    },
+    spot: {
+      head: ["HOW A QUICK", "CUT WORKS"], label: "QUICK CUT ON THE SAME BEAT",
+      items: [
+        ["Cut on the beat", "Track A stops and Track B starts on the same beat."],
+        ["Match the tempo", "The same BPM on both tracks keeps the grid locked."],
+        ["Cue the exact spot", "Set a cue on the first beat of the new section."],
+      ],
+    },
+    fix: {
+      head: ["CUT ON A", "PHRASE LINE"],
+      callout: "Cut on the first beat of a new phrase and the crowd will feel it land.",
+      steps: [
+        "Find your cut point in Track A, like the end of a build-up.",
+        "Cue Track B on its first beat and match the BPM.",
+        "Start Track B on the beat and pull Track A out at the same moment.",
+      ],
+    },
+    pdf: {
+      what: "A quick cut switches from one track to the next instantly, on a chosen beat. There is no blend, no overlap and no effect, just a clean, sudden change.",
+      feel: "Sharp, sudden and high energy. It feels like a hit.",
+      use: [
+        "Drop to drop, when one big moment hands over to the next.",
+        "Build-up to drop, landing the new track right on the first beat.",
+        "Edits and short sets where you want to keep the energy up.",
+      ],
+      check: [
+        ["What does a quick cut skip?", "The blend. There is no overlap or effect."],
+        ["What must match for a quick cut to sound clean?", "The beat and the tempo."],
+        ["What helps you hit the exact spot?", "A cue point on the first beat of the new section."],
+      ],
+      remember: "Match the beat. Cue the spot. Cut with confidence.",
+    },
+  },
+  {
+    n: 14, mood: { hook: "skeptical", pain: "sad", fix: "smile", cta: "smirk" }, series: "Mix Lab", sn: 2, stotal: 5,
+    slug: "midrange-vocal-separation", name: "Midrange Vocal Separation", wave: "spectrum", layout: "art", art: "color-overwhelmed",
+    hook: { lines: ["MAKE ROOM", "FOR THE", "VOCALS"], accentFrom: 1, sub: "Midrange vocal separation, explained in 5 swipes" },
+    pain: {
+      head: ["WHY CAN'T YOU", "HEAR THE VOCAL?"],
+      body: "Vocals, guitars, synths and snares all fight for the same midrange. When two tracks pile up there, the vocal gets buried and the mix sounds muddy.",
+    },
+    spot: {
+      head: ["WHERE VOCALS", "LIVE"], label: "THE MIDRANGE (ROUGHLY 200 HZ TO 4 KHZ)",
+      items: [
+        ["Low mids add body", "Roughly 200 to 500 Hz. Too much sounds boxy or muddy."],
+        ["Mids carry the vocal", "Roughly 500 Hz to 2 kHz. This is where the words live."],
+        ["Upper mids add clarity", "Roughly 2 to 4 kHz. A small boost brings presence."],
+      ],
+    },
+    fix: {
+      head: ["CARVE SPACE", "FOR THE VOCAL"],
+      callout: "Cut the competing mids on the other track before you boost the vocal.",
+      steps: [
+        "Find the vocal range, about 500 Hz to 4 kHz.",
+        "Turn the mid knob down a little on the other track.",
+        "Still hidden? Add a touch of mids to the vocal. Small moves only.",
+      ],
+    },
+    pdf: {
+      what: "The midrange is the part of the spectrum, roughly 200 Hz to 4 kHz, where vocals, guitars, synths and snares all live. Vocal separation means making room there so the voice stays clear.",
+      feel: "Clear and forward when it's right. Boxy, muddy or buried when it isn't.",
+      use: [
+        "Mixing an acapella over an instrumental.",
+        "Blending two full tracks without the vocals clashing.",
+        "Fixing a vocal that disappears when the drums come in.",
+      ],
+      check: [
+        ["Roughly where does the midrange sit?", "About 200 Hz to 4 kHz."],
+        ["What do you cut first when vocals clash?", "The competing mids on the other track."],
+        ["What does too much low-mid sound like?", "Boxy or muddy."],
+      ],
+      remember: "Make room first. Boost second.",
+    },
+  },
+  {
+    n: 15, mood: { hook: "shocked", pain: "sad", fix: "smirk", cta: "smile" }, series: "Mix Lab", sn: 3, stotal: 5,
+    slug: "resonance-control", name: "Resonance Control", wave: "resonance", layout: "sticker",
+    hook: { lines: ["THE KNOB THAT", "MAKES FILTERS", "SING"], accentFrom: 1, sub: "Resonance, explained in 5 swipes" },
+    pain: {
+      head: ["YOUR FILTER SWEEP", "SOUNDS FLAT"],
+      body: "A plain filter sweep just takes sound away. Resonance boosts the frequencies right at the cutoff, so the sweep gets a clear peak you can hear and feel.",
+    },
+    spot: {
+      head: ["HOW RESONANCE", "SHAPES A FILTER"], label: "LOW-PASS FILTER WITH RESONANCE",
+      items: [
+        ["Low resonance", "A smooth, natural sweep. Great for blending."],
+        ["Medium resonance", "Clear and punchy. The sweet spot for most mixes."],
+        ["High resonance", "A sharp peak. Big energy, but it can get harsh."],
+      ],
+    },
+    fix: {
+      head: ["USE IT IN", "SMALL DOSES"],
+      callout: "Raise resonance slowly while you sweep the cutoff to build tension.",
+      steps: [
+        "Start with low resonance and sweep the cutoff slowly.",
+        "Raise the resonance a little as you build toward the drop.",
+        "Bring it back down as the drop lands so it doesn't get harsh.",
+      ],
+    },
+    pdf: {
+      what: "Resonance, sometimes called Q, boosts the frequencies right around a filter's cutoff point. The higher the resonance, the sharper the peak and the more obvious the filter effect.",
+      feel: "Low: smooth and natural. High: sharp, whistling and dramatic.",
+      use: [
+        "Filter sweeps that build into a drop.",
+        "Isolating one part of a track, like a vocal or a snare, with a band-pass filter.",
+        "Creating unusual textures and effects.",
+      ],
+      check: [
+        ["What does resonance boost?", "The frequencies around the cutoff point."],
+        ["What happens when resonance is very high?", "A sharp peak that can sound harsh."],
+        ["When do you raise it?", "Slowly, during a build."],
+      ],
+      remember: "Sweep the cutoff. Nudge the resonance. Keep it musical.",
+    },
+  },
+  {
+    n: 16, mood: { hook: "serious", pain: "skeptical", fix: "point", cta: "smile" }, series: "Mix Lab", sn: 4, stotal: 5,
+    slug: "eq-and-filter-combo", name: "EQ and Filter Combo", wave: "eqfilter", layout: "art", art: "bw-stressed-callout",
+    hook: { lines: ["EQ + FILTER:", "THE CLEAN", "MIX COMBO"], accentFrom: 1, sub: "EQ and filter together, explained in 5 swipes" },
+    pain: {
+      head: ["TWO TRACKS.", "ONE CROWDED MIX."],
+      body: "When two full tracks play together, their lows and highs pile up and the mix turns messy. EQ shapes each range. A filter removes everything above or below a point. Together they keep it clean.",
+    },
+    spot: {
+      head: ["EQ VS", "FILTER"], label: "HIGH-PASS IN, LOW-PASS OUT",
+      items: [
+        ["EQ shapes the sound", "Boost or cut low, mid and high to balance a track."],
+        ["Filters remove the extremes", "A low-pass keeps the lows. A high-pass keeps the highs."],
+        ["Use both together", "Filter to clear space, then EQ to fine-tune."],
+      ],
+    },
+    fix: {
+      head: ["FILTER OUT.", "FILTER IN."],
+      callout: "Close a low-pass on the old track while a high-pass opens on the new one.",
+      steps: [
+        "Close the low-pass slowly on the outgoing track.",
+        "Open the high-pass slowly on the incoming track.",
+        "Fine-tune with EQ, then swap the bass on the bar line.",
+      ],
+    },
+    pdf: {
+      what: "EQ raises or lowers the level of low, mid and high frequencies. A filter cuts everything above or below a chosen point. Used together, they let you clear space for each track in a mix.",
+      feel: "Clean and controlled, with no frequency fights.",
+      use: [
+        "Smooth transitions: low-pass on the outgoing track, high-pass on the incoming one.",
+        "Keeping one kick and one bassline in the mix at a time.",
+        "Taming harsh hi-hats with a gentle low-pass or a high EQ cut.",
+      ],
+      check: [
+        ["What does a low-pass filter keep?", "The low frequencies."],
+        ["Which filter goes on the incoming track?", "A high-pass, opened slowly."],
+        ["What does EQ do?", "Raises or lowers specific frequency ranges."],
+      ],
+      remember: "Filter to clear space. EQ to fine-tune.",
+    },
+  },
+  {
+    n: 17, mood: { hook: "smile", pain: "skeptical", fix: "point", cta: "smirk" }, series: "Mix Lab", sn: 5, stotal: 5,
+    slug: "old-song-to-modern-remix", name: "Old Song to Modern Remix", wave: "remix", layout: "sticker",
+    hook: { lines: ["OLD SONG.", "NEW LIFE.", "ONE REMIX."], accentFrom: 1, sub: "Old song to modern remix, explained in 5 swipes" },
+    pain: {
+      head: ["GREAT SONG.", "QUIET FLOOR."],
+      body: "Classic songs have the melody and the memories, but they often sound smaller than today's tracks. Played as they are, they can drop the energy in your set.",
+    },
+    spot: {
+      head: ["WHAT MAKES A", "GOOD REMIX"], label: "ORIGINAL VS MODERN REMIX",
+      items: [
+        ["Keep the emotion", "The vocal and melody are why people love the song."],
+        ["Add modern drums and bass", "Punchy drums and a strong low end bring the energy."],
+        ["Build the arrangement", "An intro, build-up, drop and breakdown give DJs something to play."],
+      ],
+    },
+    fix: {
+      head: ["REMIX IT", "IN 3 MOVES"],
+      callout: "Keep the vocal, rebuild the groove, and give it a clear intro and drop.",
+      steps: [
+        "Pick a song with a strong vocal and a high-quality audio file.",
+        "Split it into stems, then rebuild the drums and bass.",
+        "Add an intro, a build and a drop so you can mix it.",
+      ],
+    },
+    pdf: {
+      what: "A modern remix keeps the heart of a classic song, usually the vocal and melody, and rebuilds the rest with modern drums, bass and effects so it works on today's dance floor.",
+      feel: "Familiar and fresh at the same time.",
+      use: [
+        "Edits and remixes that get an instant reaction.",
+        "Bridging old and new for a mixed-age crowd, like a wedding.",
+        "Posting a remix online usually needs permission from the rights holders.",
+      ],
+      check: [
+        ["What should you keep from the original?", "The vocal and the emotion."],
+        ["What do you split the song into to remix it?", "Stems: vocals, drums and music."],
+        ["Which arrangement parts help DJs mix it?", "An intro, build-up, breakdown and drop."],
+      ],
+      remember: "Keep the heart. Rebuild the groove.",
+    },
+  },
 ];
 
 // One-line takeaways used on the roundup grid and the cheat sheet PDF.

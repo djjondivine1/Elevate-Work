@@ -298,7 +298,9 @@ const PDF_CSS = `
 `;
 
 function pdfTop(l) {
-  return `<div class="top"><img src="${L("secondary-ivory")}"><div class="ml">Waveform Lab &middot; ${l.roundup ? "Cheat Sheet" : "Lesson " + String(l.n).padStart(2, "0") + " of 11"}</div></div>`;
+  const series = l.series || "Waveform Lab";
+  const lab = l.roundup ? "Cheat Sheet" : "Lesson " + String(l.sn || l.n).padStart(2, "0") + " of " + (l.stotal || 11);
+  return `<div class="top"><img src="${L("secondary-ivory")}"><div class="ml">${series} &middot; ${lab}</div></div>`;
 }
 function pdfFoot() {
   return `<div class="pfoot"><img class="mk" src="${L("mark-gold")}"><div><div class="t1">${HANDLE} &middot; Elevate DJ Academy</div><div class="t2">Join the free academy. Link in bio.</div></div><img class="jon" src="${A}/jon/jon-smile-sticker.png"></div>`;
