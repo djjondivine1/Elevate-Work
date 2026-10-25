@@ -821,7 +821,7 @@ function caption(l) {
     ].join("\n");
   }
   return [
-    `${first}. ${l.name}, explained.`,
+    `${first}${/[.?!]$/.test(first) ? "" : "."} ${l.capLabel || l.name + ", explained"}.`,
     "",
     l.pain.body,
     "",

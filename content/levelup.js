@@ -140,7 +140,7 @@ module.exports = [
   },
   {
     n: 25, sn: 7, ...S, theme: "ivory", mood: { hook: "smirk", pain: "skeptical", fix: "point", cta: "smile" },
-    slug: "one-effect-one-job", name: "One Effect, One Job", wave: "fxjob", layout: "art", gear: "flx4-full",
+    slug: "one-effect-one-job", name: "One Effect, One Job", capLabel: "Using effects, explained", wave: "fxjob", layout: "art", gear: "flx4-full",
     hook: { lines: ["ONE EFFECT.", "ONE JOB."], accentFrom: 1, sub: "Using effects, explained in 5 swipes" },
     pain: { head: ["EFFECT ON", "EVERY MIX."], body: "An effect on every transition teaches the room to hear your tricks instead of your tracks. Too often it is covering a weak mix." },
     spot: { tag: "KEY POINTS", head: ["EFFECT", "RULES"], label: "EFFECT ON EVERYTHING VS ONE JOB", items: [
