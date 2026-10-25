@@ -834,4 +834,6 @@ function caption(l) {
   ].join("\n");
 }
 
+lessons.push(...require("./levelup"));
+
 module.exports = { lessons, cheat, HANDLE, caption };

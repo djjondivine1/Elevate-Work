@@ -2,8 +2,8 @@
 
 ## Carousels, stories and PDFs for the free academy
 
-Two series, rebuilt in Elevate's branding and Jon's coach voice:
-**Waveform Lab** (11 lessons plus a cheat sheet) and **Mix Lab** (6 mixing lessons).
+Three series, rebuilt in Elevate's branding and Jon's coach voice:
+**Waveform Lab** (11 lessons plus a cheat sheet) **Mix Lab** (6 mixing lessons) and **Level Up Lab** (15 intermediate lessons, 19-33).
 Nine lessons use the ivory theme and nine use onyx, so the feed alternates. Every picture is Jon or DJ gear
 (DDJ-REV7, DDJ-FLX4, EQ waveforms, EQ knobs); no family or meeting photos.
 Every lesson ships as:
@@ -41,6 +41,21 @@ Set `theme: "ivory"` on a lesson in `content/lessons.js` to flip it.
 | 16 | EQ and filter combo (Mix Lab 4 of 6) |
 | 17 | Old song to modern remix (Mix Lab 5 of 6) |
 | 18 | DJ download stores and pools (Mix Lab 6 of 6, ivory, 8 slides) |
+| 19 | Phrase counting (Level Up Lab 1 of 15) |
+| 20 | Hot cue map (2 of 15) |
+| 21 | Loops as a safety net (3 of 15) |
+| 22 | Camelot wheel moves (4 of 15) |
+| 23 | Fix the beatgrid (5 of 15) |
+| 24 | Gain staging (6 of 15) |
+| 25 | One effect, one job (7 of 15) |
+| 26 | Echo-out (8 of 15) |
+| 27 | Long or short blend (9 of 15) |
+| 28 | Half-time and double-time (10 of 15) |
+| 29 | Set energy arc (11 of 15) |
+| 30 | Read the room (12 of 15) |
+| 31 | Train wreck recovery (13 of 15) |
+| 32 | Record, wait, review (14 of 15) |
+| 33 | USB export checklist (15 of 15) |
 
 ### Brand rules applied
 
@@ -69,7 +84,9 @@ Needs Node with `playwright` (Chromium). Output goes to `output/`. Layout warnin
 
 ### Where things live
 
-- `content/lessons.js`: all lesson copy. Edit text here, re-render.
+- `content/lessons.js`: lesson copy for lessons 1-18. `content/levelup.js`: Level Up Lab lessons 19-33 (appended to the same list). Edit text here, re-render.
+- `reports/Intermediate DJ lesson topics.md` and `research_notes/`: the research behind Level Up Lab.
+- `build/waves_level.js`: diagrams for the Level Up Lab lessons.
 - `build/waves.js`: waveform diagrams (pure SVG math, no images).
 - `build/templates.js`: slide, story and PDF layouts.
 - `build/render.js`: renderer.

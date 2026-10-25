@@ -83,7 +83,10 @@ function bars(id, items, mid, th, rx) {
   }).join("");
 }
 
+const LEVEL = new Set(["phrase","cuemap","loops","camelot","gridfix","meters","fxjob","echoout","blendlen","halftime","arc","floor","recover","cycle","usb"]);
+
 function draw(type, opts = {}) {
+  if (LEVEL.has(type)) return require("./waves_level").drawLevel(type, opts);
   const w = opts.w || 900, h = opts.h || 300;
   const th = THEMES[opts.theme || "dark"];
   const mini = !!opts.mini;
@@ -473,4 +476,4 @@ function draw(type, opts = {}) {
   return wrap(id, w, h, th, body);
 }
 
-module.exports = { draw, THEMES };
+module.exports = { draw, THEMES, text, trace, wrap, polyline, rng, f };

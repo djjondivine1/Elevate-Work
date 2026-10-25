@@ -260,7 +260,7 @@ function slideSpot(l, fmt) {
   const svg = draw(l.wave, { w: cardW, h: cardH - 44 });
   const rows = l.spot.items.map(([h, b], i) => `<div class="row"><div class="num">0${i + 1}</div><div><div class="rh">${esc(h)}</div><div class="rb">${esc(b)}</div></div></div>`).join("");
   return shell(fmt, `${pill()}<div class="col">
-    <div class="tag"><span>WHAT YOU'RE MISSING</span></div>
+    <div class="tag"><span>${esc(l.spot.tag || "WHAT YOU'RE MISSING")}</span></div>
     ${hl}
     <div class="card" style="margin:${story ? 34 : 24}px 0 ${story ? 28 : 20}px"><div class="lab">${esc(l.spot.label)}</div>${svg}</div>
     <div class="rows">${rows}</div>
@@ -426,7 +426,7 @@ function pdfLesson(l, next) {
     <div class="ptitle" data-max="54" data-min="34" id="pt1">${esc(l.name)}</div>
     <div class="psub">What it is, how to spot it and what to do with it.</div>
     <div class="cols"><div><div class="h3">What it is</div><div class="p">${esc(p.what)}</div></div>
-      <div><div class="h3">How it sounds</div><div class="p">${esc(p.feel)}</div></div></div>
+      <div><div class="h3">${esc(p.feelLabel || "How it sounds")}</div><div class="p">${esc(p.feel)}</div></div></div>
     <div class="dcard"><div class="lab">${esc(l.spot.label)}</div>${diag}</div>
     <div class="feat">${feats}</div>
     <div class="drill"><div class="dh">DO THIS TONIGHT</div><div class="dq">${esc(l.fix.callout)}</div>${steps}</div>

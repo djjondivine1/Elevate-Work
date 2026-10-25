@@ -7,13 +7,9 @@ src = open("content/lessons.js").read()
 ivory = set()
 for m in re.finditer(r"n:\s*(\d+),[^{}]*?(?:\{[^{}]*\}[^{}]*?)*?theme:\s*\"ivory\"", src):
     pass
-def theme_of(n):
-    # find block for lesson n up to the next "n:" line
-    blocks = re.split(r"\n\s*n:\s*", src)
-    for b in blocks[1:]:
-        if re.match(rf"{n}\b", b):
-            return "ivory" if re.search(r'theme:\s*"ivory"', b.split("\n  },\n")[0] if False else b[:600]) else "onyx"
-    return "onyx"
+import subprocess, json
+THEMES = {l["n"]: l.get("theme", "onyx") for l in json.loads(subprocess.check_output(["node", "-e", "console.log(JSON.stringify(require('./content/lessons').lessons.map(l=>({n:l.n,theme:l.theme}))))"]))}
+def theme_of(n): return THEMES.get(n, "onyx")
 def slides(d, fmt): return sorted(glob.glob(os.path.join(d, fmt, "0*.png")))
 def sheet(files, scale, out, cols=None, pad=10):
     ims = [Image.open(f).convert("RGB") for f in files]
@@ -25,11 +21,20 @@ def sheet(files, scale, out, cols=None, pad=10):
     s.save(out, quality=88); print(out, s.size)
 for d in lessons:
     sheet(slides(d,"feed"), 0.3, f"{OUT}/{os.path.basename(d)}.jpg")
-hooks = [slides(d,"feed")[0] for d in lessons]
+base = [d for d in lessons if int(os.path.basename(d)[:2]) < 19]
+hooks = [slides(d,"feed")[0] for d in base]
 sheet(hooks, 0.28, f"{OUT}/all-hooks.jpg", cols=6)
-iv = [d for d in lessons if theme_of(int(os.path.basename(d)[:2]))=="ivory"]
-on = [d for d in lessons if d not in iv]
+iv = [d for d in base if theme_of(int(os.path.basename(d)[:2]))=="ivory"]
+on = [d for d in base if d not in iv]
 print("ivory", [os.path.basename(d)[:2] for d in iv]); print("onyx", [os.path.basename(d)[:2] for d in on])
 for name, ds in (("set-ivory", iv), ("set-onyx", on)):
     sheet([slides(d,"feed")[0] for d in ds] + [slides(d,"feed")[1] for d in ds], 0.28, f"{OUT}/{name}-hook-pain.jpg", cols=len(ds))
-sheet([slides(d,"story")[0] for d in lessons], 0.2, f"{OUT}/all-stories-hooks.jpg", cols=9)
+sheet([slides(d,"story")[0] for d in base], 0.2, f"{OUT}/all-stories-hooks.jpg", cols=9)
+
+# Level Up Lab (19-33): three sheets of five lessons, all five feed slides each
+lu = [d for d in lessons if int(os.path.basename(d)[:2]) >= 19]
+for i in range(0, len(lu), 5):
+    grp = lu[i:i+5]
+    files = [f for d in grp for f in slides(d, "feed")[:5]]
+    sheet(files, 0.2, f"{OUT}/levelup-{i//5+1}.jpg", cols=5)
+sheet([slides(d,"feed")[0] for d in lu], 0.28, f"{OUT}/levelup-hooks.jpg", cols=5)
